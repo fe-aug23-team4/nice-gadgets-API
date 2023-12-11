@@ -4,6 +4,7 @@ import { Phone } from '../types/Phone';
 import { SortBy } from '../types/SortBy';
 import { QueryParams } from '../types/QueryParams';
 import { getImgPath } from '../helpers/getImgPath';
+import { calcDiscount } from '../helpers/calcDiscount';
 
 const phonesPath = path.join(__dirname, '../../public/api', 'phones.json');
 const phonesJson = fs.readFileSync(phonesPath, 'utf-8');
@@ -50,6 +51,15 @@ export const phonesService = {
 
   getNew: () => {
     const sortedPhones = [...phones].sort((a, b) => b.year - a.year);
+
+    return sortedPhones.slice(0, 8).map((phone) => getImgPath(phone));
+  },
+
+  getDiscount: () => {
+    const sortedPhones = [...phones].sort(
+      (a, b) =>
+        calcDiscount(a.fullPrice, a.price) - calcDiscount(b.fullPrice, b.price),
+    );
 
     return sortedPhones.slice(0, 8).map((phone) => getImgPath(phone));
   },

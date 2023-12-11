@@ -9,4 +9,8 @@ export const phonesController = {
   getNewPhones: (req: Request, res: Response) => {
     res.send(phonesService.getNew());
   },
+
+  getDiscount: (req: Request, res: Response) => {
+    res.send(phonesService.getDiscount());
+  },
 };

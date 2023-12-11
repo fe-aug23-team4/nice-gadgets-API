@@ -5,3 +5,4 @@ export const phonesRouter = express.Router();
 
 phonesRouter.get('/', phonesController.getPhones);
 phonesRouter.get('/new', phonesController.getNewPhones);
+phonesRouter.get('/discount', phonesController.getDiscount);
