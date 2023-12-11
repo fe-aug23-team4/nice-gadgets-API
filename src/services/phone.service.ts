@@ -47,4 +47,10 @@ export const phonesService = {
 
     return filteredPhones.map((phone) => getImgPath(phone));
   },
+
+  getNew: () => {
+    const sortedPhones = [...phones].sort((a, b) => b.year - a.year);
+
+    return sortedPhones.slice(0, 8).map((phone) => getImgPath(phone));
+  },
 };

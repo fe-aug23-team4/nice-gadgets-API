@@ -8,8 +8,6 @@ function createServer() {
   const app = express();
 
   app.use(express.static(path.resolve('../public')));
-  // eslint-disable-next-line no-console
-  console.log(path.resolve('./public'));
 
   app.use(cors(), express.json());
 

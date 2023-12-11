@@ -5,4 +5,8 @@ export const phonesController = {
   getPhones: (req: Request, res: Response) => {
     res.send(phonesService.getWithParams(req.query));
   },
+
+  getNewPhones: (req: Request, res: Response) => {
+    res.send(phonesService.getNew());
+  },
 };
