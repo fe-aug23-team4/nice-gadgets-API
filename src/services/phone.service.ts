@@ -3,8 +3,9 @@ import path from 'path';
 import { Phone } from '../types/Phone';
 import { SortBy } from '../types/SortBy';
 import { QueryParams } from '../types/QueryParams';
+import { getImgPath } from '../helpers/getImgPath';
 
-const phonesPath = path.join(__dirname, '../../api', 'phones.json');
+const phonesPath = path.join(__dirname, '../../public/api', 'phones.json');
 const phonesJson = fs.readFileSync(phonesPath, 'utf-8');
 const phones: Phone[] = JSON.parse(phonesJson);
 
@@ -44,6 +45,6 @@ export const phonesService = {
       );
     }
 
-    return filteredPhones;
+    return filteredPhones.map((phone) => getImgPath(phone));
   },
 };
