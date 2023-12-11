@@ -13,26 +13,28 @@ export const phonesService = {
     const { sortBy, perPage, page } = query;
     let filteredPhones = [...phones];
 
-    switch (sortBy) {
-      case SortBy.Highest:
-        filteredPhones = filteredPhones.sort((a, b) => b.price - a.price);
-        break;
+    if (sortBy) {
+      switch (sortBy) {
+        case SortBy.Highest:
+          filteredPhones = filteredPhones.sort((a, b) => b.price - a.price);
+          break;
 
-      case SortBy.Lowest:
-        filteredPhones = filteredPhones.sort((a, b) => a.price - b.price);
-        break;
+        case SortBy.Lowest:
+          filteredPhones = filteredPhones.sort((a, b) => a.price - b.price);
+          break;
 
-      case SortBy.Newest:
-        filteredPhones = filteredPhones.sort((a, b) => b.year - a.year);
-        break;
+        case SortBy.Newest:
+          filteredPhones = filteredPhones.sort((a, b) => b.year - a.year);
+          break;
 
-      case SortBy.Oldest:
-        filteredPhones = filteredPhones.sort((a, b) => a.year - b.year);
-        break;
+        case SortBy.Oldest:
+          filteredPhones = filteredPhones.sort((a, b) => a.year - b.year);
+          break;
 
-      default:
-        filteredPhones = [];
-        break;
+        default:
+          filteredPhones = [];
+          break;
+      }
     }
 
     if (perPage && page) {
