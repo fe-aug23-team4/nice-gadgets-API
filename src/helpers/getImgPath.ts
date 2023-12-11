@@ -1,10 +1,10 @@
-import { PhoneDetails } from '../types/PhoneDetails';
+import { PhoneDetail } from '../types/PhoneDetail';
 import { Phone } from '../types/Phone';
 import env from 'dotenv';
 
 env.config();
 
-export function getImgPath(phone: PhoneDetails | Phone) {
+export function getImgPath(phone: PhoneDetail | Phone) {
   if ('image' in phone) {
     return {
       ...phone,

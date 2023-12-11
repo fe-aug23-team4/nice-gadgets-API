@@ -1,14 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import { Phone } from '../types/Phone';
 import { SortBy } from '../types/SortBy';
 import { QueryParams } from '../types/QueryParams';
 import { getImgPath } from '../helpers/getImgPath';
 import { calcDiscount } from '../helpers/calcDiscount';
+import { getPhones } from '../helpers/getPhones';
+import { getPhoneDetail } from '../helpers/getPhoneDetail';
 
-const phonesPath = path.join(__dirname, '../../public/api', 'phones.json');
-const phonesJson = fs.readFileSync(phonesPath, 'utf-8');
-const phones: Phone[] = JSON.parse(phonesJson);
+const phones = getPhones();
 
 export const phonesService = {
   getWithParams: (query: QueryParams) => {
@@ -62,5 +59,11 @@ export const phonesService = {
     );
 
     return sortedPhones.slice(0, 8).map((phone) => getImgPath(phone));
+  },
+
+  getDetail: async(id: string) => {
+    const phoneDetail = await getPhoneDetail(id);
+
+    return getImgPath(phoneDetail);
   },
 };

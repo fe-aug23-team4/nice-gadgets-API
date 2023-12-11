@@ -1,6 +1,6 @@
 import { PhoneDescription } from './PhoneDescription';
 
-export interface PhoneDetails {
+export interface PhoneDetail {
   id: string;
   namespaceId: string;
   name: string;
