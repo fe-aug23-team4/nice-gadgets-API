@@ -10,7 +10,7 @@ const phones: Phone[] = JSON.parse(phonesJson);
 
 export const phonesService = {
   getWithParams: (query: QueryParams) => {
-    const { sortBy, phonesNum, page } = query;
+    const { sortBy, perPage, page } = query;
     let filteredPhones = [...phones];
 
     switch (sortBy) {
@@ -35,10 +35,10 @@ export const phonesService = {
         break;
     }
 
-    if (phonesNum && page) {
+    if (perPage && page) {
       filteredPhones = filteredPhones.slice(
-        (Number(page) - 1) * Number(phonesNum),
-        Number(phonesNum) * Number(page),
+        (Number(page) - 1) * Number(perPage),
+        Number(perPage) * Number(page),
       );
     }
 
