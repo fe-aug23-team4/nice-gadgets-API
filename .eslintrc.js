@@ -14,5 +14,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
-  rules: {},
+  rules: {
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'warn',
+  },
 };
