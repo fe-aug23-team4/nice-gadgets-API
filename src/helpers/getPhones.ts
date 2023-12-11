@@ -4,7 +4,7 @@ import path from 'path';
 import { Phone } from '../types/Phone';
 
 export async function getPhones() {
-  const phonesPath = path.resolve('../public/api/phones.json');
+  const phonesPath = path.resolve('../public/api', 'phones.json');
 
   // eslint-disable-next-line no-console
   console.log(path.resolve('../public/api/phones.json'));
