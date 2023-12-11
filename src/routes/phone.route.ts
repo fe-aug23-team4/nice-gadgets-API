@@ -7,3 +7,8 @@ phonesRouter.get('/', phonesController.getPhones);
 phonesRouter.get('/new', phonesController.getNewPhones);
 phonesRouter.get('/discount', phonesController.getDiscount);
 phonesRouter.get('/:phoneId', phonesController.getPhoneDetail);
+
+phonesRouter.get(
+  '/:phoneId/recommended',
+  phonesController.getRecommendedPhones,
+);
