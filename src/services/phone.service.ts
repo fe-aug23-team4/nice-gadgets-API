@@ -91,4 +91,10 @@ export const phonesService = {
 
     return recommendedPhones.slice(0, 8).map((p) => getImgPath(p));
   },
+
+  getAmount: async() => {
+    const phones = await getPhones();
+
+    return phones.length;
+  },
 };

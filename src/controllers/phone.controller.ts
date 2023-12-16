@@ -42,4 +42,8 @@ export const phonesController = {
 
     res.send(await phonesService.getRecommended(phone));
   },
+
+  getPhonesAmount: async(req: Request, res: Response) => {
+    res.send(await phonesService.getAmount());
+  },
 };
