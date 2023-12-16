@@ -9,7 +9,7 @@
     "lint": "eslint . --ignore-path .gitignore --fix",
     "fix-style": "npm run format && npm run lint",
     "prepare": "husky install",
-    "start:local": "nodemon ./src/server.ts",
+    "dev": "nodemon ./src/server.ts",
     "build": "tsc",
     "start": "node ./build/server.js"
   },

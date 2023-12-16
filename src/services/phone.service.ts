@@ -95,6 +95,6 @@ export const phonesService = {
   getAmount: async() => {
     const phones = await getPhones();
 
-    return phones.length;
+    return `${phones.length}`;
   },
 };
