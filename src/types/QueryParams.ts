@@ -1,3 +1,6 @@
 export interface QueryParams {
-  [key: string]: unknown;
+  page: number,
+  perPage: number,
+  sort: string,
+  order: 'asc' | 'desc'
 }
