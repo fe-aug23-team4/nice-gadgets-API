@@ -1,100 +1,35 @@
-import { Phone } from '../types/Phone';
-import { SortBy } from '../types/SortBy';
-import { QueryParams } from '../types/QueryParams';
+import { Op } from 'sequelize';
 
-import { getImgPath } from '../helpers/getImgPath';
-import { calcDiscount } from '../helpers/calcDiscount';
-import { getPhones } from '../helpers/getPhones';
-import { getPhoneDetail } from '../helpers/getPhoneDetail';
+import { Phone, Product } from '../bd/models';
+
+import { Product as ProductType } from '../types/Product';
+import { QueryParams } from '../types/QueryParams';
+import { Categories } from '../types/Categories';
 
 export const phonesService = {
-  getPhone: async(phoneId: string) => {
-    const phones = await getPhones();
+  getDetail: (itemId: string) => Phone.findByPk(itemId),
+  getPhone: (itemId: string) => Product.findOne({ where: { itemId } }),
 
-    return phones.find((phone) => phone.phoneId === phoneId);
+  getWithParams: ({ page, perPage, sort, order }: QueryParams) => {
+    return Product.findAll({
+      where: { category: Categories.Phones },
+      offset: (page - 1) * perPage,
+      limit: perPage,
+      order: [[sort, order]],
+    });
   },
 
-  getWithParams: async(query: QueryParams) => {
-    const { sortBy, perPage, page } = query;
-    let filteredPhones = await getPhones();
+  getRecommended: (phone: ProductType) => {
+    const { itemId, price, capacity, color, ram } = phone;
 
-    if (sortBy) {
-      switch (sortBy) {
-        case SortBy.Highest:
-          filteredPhones = filteredPhones.sort((a, b) => b.price - a.price);
-          break;
-
-        case SortBy.Lowest:
-          filteredPhones = filteredPhones.sort((a, b) => a.price - b.price);
-          break;
-
-        case SortBy.Newest:
-          filteredPhones = filteredPhones.sort((a, b) => b.year - a.year);
-          break;
-
-        case SortBy.Oldest:
-          filteredPhones = filteredPhones.sort((a, b) => a.year - b.year);
-          break;
-
-        default:
-          filteredPhones = [];
-          break;
-      }
-    }
-
-    if (perPage && page) {
-      filteredPhones = filteredPhones.slice(
-        (Number(page) - 1) * Number(perPage),
-        Number(perPage) * Number(page),
-      );
-    }
-
-    return filteredPhones.map((phone) => getImgPath(phone));
-  },
-
-  getNew: async() => {
-    const phones = await getPhones();
-    const sortedPhones = phones.sort((a, b) => b.year - a.year);
-
-    return sortedPhones.slice(0, 8).map((phone) => getImgPath(phone));
-  },
-
-  getDiscount: async() => {
-    const phones = await getPhones();
-    const sortedPhones = phones.sort(
-      (a, b) =>
-        calcDiscount(a.fullPrice, a.price) - calcDiscount(b.fullPrice, b.price),
-    );
-
-    return sortedPhones.slice(0, 8).map((phone) => getImgPath(phone));
-  },
-
-  getDetail: async(id: string) => {
-    const phoneDetail = await getPhoneDetail(id);
-
-    return getImgPath(phoneDetail);
-  },
-
-  getRecommended: async(phone: Phone) => {
-    const { phoneId, price, capacity, color, ram } = phone;
-    const phones = await getPhones();
-    const higherPrice = price * 1.35;
-    const lowerPrice = price * 0.65;
-
-    const recommendedPhones = phones.filter(
-      (p) =>
-        p.phoneId !== phoneId
-        && (p.capacity === capacity || p.color === color || p.ram === ram)
-        && p.price >= lowerPrice
-        && p.price <= higherPrice,
-    );
-
-    return recommendedPhones.slice(0, 8).map((p) => getImgPath(p));
-  },
-
-  getAmount: async() => {
-    const phones = await getPhones();
-
-    return `${phones.length}`;
+    return Product.findAll({
+      where: {
+        category: Categories.Phones,
+        itemId: { [Op.ne]: itemId },
+        price: { [Op.between]: [price * 0.65, price * 1.35] },
+        [Op.or]: { capacity, color, ram },
+      },
+      limit: 12,
+    });
   },
 };
