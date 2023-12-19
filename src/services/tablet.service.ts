@@ -7,8 +7,13 @@ import { QueryParams } from '../types/QueryParams';
 import { Categories } from '../types/Categories';
 
 export const tabletsService = {
-  getDetail: (itemId: string) => Tablet.findByPk(itemId),
   getTablet: (itemId: string) => Product.findOne({ where: { itemId } }),
+  getDetail: (itemId: string) => Tablet.findByPk(itemId),
+
+  getAdditional: (namespaceId: string) =>
+    Tablet.findAll({
+      where: { namespaceId },
+    }),
 
   getWithParams: ({ page, perPage, sort, order }: QueryParams) => {
     return Product.findAll({

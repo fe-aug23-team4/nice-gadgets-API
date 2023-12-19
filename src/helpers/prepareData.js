@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const env = require('dotenv');
 const { calcDiscount } = require('./calcDiscount');
+const { colors } = require('../types/Colors');
 
 env.config();
 
 module.exports = {
-  createImgPath(product) {
+  prepareData(product) {
     if ('image' in product) {
       return {
         ...product,
@@ -21,6 +22,8 @@ module.exports = {
           (image) => `${process.env.SERVER_PATH}/${image}`,
         ),
         description: JSON.stringify(product.description),
+        colorsAvailable: product.colorsAvailable.map((color) => colors[color]),
+        color: colors[product.color],
       };
     }
   },
