@@ -40,7 +40,20 @@ export const phonesController = {
     try {
       const phoneDetail = await phonesService.getDetail(itemId);
 
-      res.send(phoneDetail);
+      if (!phoneDetail) {
+        res.status(404).send('Phone detail not found');
+
+        return;
+      }
+
+      const additional = await phonesService.getAdditional(
+        phoneDetail.namespaceId,
+      );
+
+      res.send({
+        current: phoneDetail,
+        additional,
+      });
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
         res.status(404).send('Phone detail not found');

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs/promises');
 const path = require('path');
-const { createImgPath } = require('./createImgPath');
+const { prepareData } = require('./prepareData');
 
 module.exports = {
   async getData(pathToFile) {
@@ -13,6 +13,6 @@ module.exports = {
     const dataJson = await fs.readFile(filePath, 'utf-8');
     const data = JSON.parse(dataJson);
 
-    return data.map((item) => createImgPath(item));
+    return data.map((item) => prepareData(item));
   },
 };
