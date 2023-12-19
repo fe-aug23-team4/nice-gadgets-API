@@ -26,4 +26,5 @@ export enum ProductEnum {
   ram,
   year,
   image,
+  discount,
 }
