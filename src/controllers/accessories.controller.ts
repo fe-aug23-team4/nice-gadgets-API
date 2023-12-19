@@ -22,14 +22,12 @@ export const accessoriesController = {
       return;
     }
 
-    const preparedOrder = order === 'asc' ? 'desc' : 'asc';
-
     res.send(
       await accessoriesService.getWithParams({
         page: +page > 0 ? +page : 1,
         perPage: +perPage > 0 ? +perPage : 16,
         sort,
-        order: preparedOrder,
+        order,
       }),
     );
   },
