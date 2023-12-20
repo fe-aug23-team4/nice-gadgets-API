@@ -7,7 +7,7 @@ export const tabletsController = {
     const {
       page = '1',
       perPage = '16',
-      sort = 'discount',
+      sort = 'id',
       order = 'asc',
     } = req.query;
 
