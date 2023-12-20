@@ -73,4 +73,17 @@ export const tabletsController = {
 
     res.send(await tabletsService.getRecommended(tablet));
   },
+
+  getTablet: async(req: Request, res: Response) => {
+    const { itemId } = req.params;
+    const tablet = await tabletsService.getTablet(itemId);
+
+    if (!tablet) {
+      res.status(404).send('Tablet not found');
+
+      return;
+    }
+
+    res.send(tablet);
+  },
 };

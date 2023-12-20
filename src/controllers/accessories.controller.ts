@@ -73,4 +73,17 @@ export const accessoriesController = {
 
     res.send(await accessoriesService.getRecommended(accessory));
   },
+
+  getAccessory: async(req: Request, res: Response) => {
+    const { itemId } = req.params;
+    const accessory = await accessoriesService.getAccessory(itemId);
+
+    if (!accessory) {
+      res.status(404).send('Accessory not found');
+
+      return;
+    }
+
+    res.send(accessory);
+  },
 };

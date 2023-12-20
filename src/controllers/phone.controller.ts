@@ -73,4 +73,17 @@ export const phonesController = {
 
     res.send(await phonesService.getRecommended(phone));
   },
+
+  getPhone: async(req: Request, res: Response) => {
+    const { itemId } = req.params;
+    const phone = await phonesService.getPhone(itemId);
+
+    if (!phone) {
+      res.status(404).send('Phone not found');
+
+      return;
+    }
+
+    res.send(phone);
+  },
 };
