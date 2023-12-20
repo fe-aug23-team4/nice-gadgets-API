@@ -22,7 +22,9 @@ module.exports = {
           (image) => `${process.env.SERVER_PATH}/${image}`,
         ),
         description: JSON.stringify(product.description),
-        colorsAvailable: product.colorsAvailable.map((color) => colors[color]),
+        colorsAvailable: product.colorsAvailable
+          .map((color) => colors[color])
+          .sort(),
         color: colors[product.color],
       };
     }
