@@ -48,9 +48,15 @@ export const accessoriesController = {
         accessoryDetail.namespaceId,
       );
 
+      const accessories = await Promise.all(
+        additional.map((accessory) =>
+          accessoriesService.getAccessory(accessory.id)),
+      );
+
       res.send({
         current: accessoryDetail,
         additional,
+        products: accessories,
       });
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') {

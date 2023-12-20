@@ -48,9 +48,14 @@ export const phonesController = {
         phoneDetail.namespaceId,
       );
 
+      const phones = await Promise.all(
+        additional.map((phone) => phonesService.getPhone(phone.id)),
+      );
+
       res.send({
         current: phoneDetail,
         additional,
+        products: phones,
       });
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') {

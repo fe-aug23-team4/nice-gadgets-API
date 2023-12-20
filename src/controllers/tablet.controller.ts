@@ -48,9 +48,14 @@ export const tabletsController = {
         tabletDetail.namespaceId,
       );
 
+      const tablets = await Promise.all(
+        additional.map((tablet) => tabletsService.getTablet(tablet.id)),
+      );
+
       res.send({
         current: tabletDetail,
         additional,
+        products: tablets,
       });
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
