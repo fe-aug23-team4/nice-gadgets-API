@@ -1,5 +1,6 @@
 import { Product } from '../bd/models';
 
+import { fetchAndShuffleProducts } from '../helpers/fetchAndShuffleProducts';
 import { Categories } from '../types/Categories';
 
 export const productsService = {
@@ -25,7 +26,6 @@ export const productsService = {
     }
   },
 
-  getNew: () => Product.findAll({ order: [['year', 'desc']], limit: 12 }),
-  getDiscount: () =>
-    Product.findAll({ order: [['discount', 'desc']], limit: 12 }),
+  getNew: () => fetchAndShuffleProducts('year'),
+  getDiscount: () => fetchAndShuffleProducts('discount'),
 };

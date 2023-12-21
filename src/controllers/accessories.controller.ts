@@ -7,7 +7,7 @@ export const accessoriesController = {
     const {
       page = '1',
       perPage = '16',
-      sort = 'id',
+      sort = 'discount',
       order = 'asc',
     } = req.query;
 

@@ -16,6 +16,15 @@ export const phonesService = {
     }),
 
   getWithParams: ({ page, perPage, sort, order }: QueryParams) => {
+    if (sort === 'discount') {
+      return Product.findAll({
+        where: { category: Categories.Phones },
+        offset: (page - 1) * perPage,
+        limit: perPage,
+        order: [['year', 'DESC'], ['discount', 'DESC']],
+      });
+    }
+
     return Product.findAll({
       where: { category: Categories.Phones },
       offset: (page - 1) * perPage,

@@ -18,10 +18,10 @@ module.exports = {
     pink: '#ead0d6',
     graphite: '#616469',
     sierrablue: '#bfdaf7',
-    'rose gold': '#f8b0c9',
+    'rose gold': '#f8b0c8',
     'sky blue': '#c1f1ff',
     starlight: '#f8f9ec',
-    'space gray': '#717377',
-    'space-gray': '#717379',
+    'space gray': '#717378',
+    'space-gray': '#717378',
   },
 };
