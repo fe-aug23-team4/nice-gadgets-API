@@ -23,12 +23,12 @@
 </p>
 
 <p align="justify">
-  API developed using the MVC (Model-View-Controller) architectural pattern. This pattern is widely used in web application development and it helps in organizing the codebase in a way that separates data handling logic (Model), user interface (View) and control flow (Controller).
+  API developed using the MVC architectural pattern. This pattern is widely used in web application development and helps organize the codebase in a way that separates data handling logic, user interface, and control flow.
 </p>
 
 <p align="justify">
-  The application uses Sequelize, a promise-based Node.js ORM (Object-Relational Mapping) for PostgresSQL. Sequelize is used to define models for the database tables and to handle database operations.
-  The models defined in this application include 'Product', 'Phone', 'Tablet' and 'Accessory'. Each model represents a table in the database and defines the structure of the table.
+  The application uses Sequelize, a promise-based Node.js ORM for PostgresSQL. Sequelize is used to define models for the database tables and to handle database operations.
+  The models defined in this application include 'Product', 'Phone', 'Tablet', and 'Accessory'. Each model represents a table in the database and defines the structure of the table.
 </p>
 
 <p align="justify">
